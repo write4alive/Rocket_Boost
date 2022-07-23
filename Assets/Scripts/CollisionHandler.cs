@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float invoke_load_delay = 2f;
     private void OnCollisionEnter(Collision other) 
     {
        
@@ -16,6 +17,7 @@ public class CollisionHandler : MonoBehaviour
                 break;
 
             case "Finish":
+                finish_level_sequence();
                 Debug.Log("Finish");
                 break;
 
@@ -25,14 +27,38 @@ public class CollisionHandler : MonoBehaviour
 
             default:
                 Debug.Log("booom ! ");
-                NewMethod();
+                start_crash_sequence();
                 break;
         }
 
 
     }
 
-    private static void NewMethod()
+    void finish_level_sequence()
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("load_next_level",invoke_load_delay);
+    }
+    void start_crash_sequence()
+    {
+        // todo add sfx then crash and partical effect
+        GetComponent<Movement>().enabled = false;
+        Invoke("hit_reset_level",invoke_load_delay);
+    }
+
+    void load_next_level()
+    {
+        int current_scene_index  = SceneManager.GetActiveScene().buildIndex;
+        int next_scene_index = current_scene_index + 1;
+        //when we completed all levels game will start again from level 1
+        if (next_scene_index == SceneManager.sceneCountInBuildSettings)
+        {
+            next_scene_index = 0;   
+        }
+        SceneManager.LoadScene(next_scene_index);
+    }
+
+    void hit_reset_level()
     {
         int current_scene_index  = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(current_scene_index);
