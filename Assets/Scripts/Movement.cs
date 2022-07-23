@@ -8,6 +8,9 @@ public class Movement : MonoBehaviour
     AudioSource audios;
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rotationThrust = 1f;
+    [SerializeField] AudioClip mainEngine;
+
+    bool isAlive;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,7 @@ public class Movement : MonoBehaviour
 
             if(!audios.isPlaying)
             {
-               audios.Play(); 
+               audios.PlayOneShot(mainEngine);
             }
         else
         {
