@@ -15,14 +15,20 @@ public class CollisionHandler : MonoBehaviour
     AudioSource audios;
     ParticleSystem particles;
     bool isTransitioning = false;
+    bool collisionDisabled = false;
 
     void Start() 
     {
         audios = GetComponent<AudioSource>();    
     }
+
+    void Update()
+    {
+        DebugKey();
+    }
     private void OnCollisionEnter(Collision other) 
     {
-       if (isTransitioning){ return; }
+       if (isTransitioning || collisionDisabled){ return; }
 
         switch (other.gameObject.tag)
         {
@@ -83,5 +89,17 @@ public class CollisionHandler : MonoBehaviour
     {
         int current_scene_index  = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(current_scene_index);
+    }
+     void DebugKey()
+    {
+        if (Input.GetKey(KeyCode.L))
+        {
+            load_next_level();
+        }
+
+        else if (Input.GetKey(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled;
+        }
     }
 }

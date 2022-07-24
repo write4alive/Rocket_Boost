@@ -27,67 +27,83 @@ public class Movement : MonoBehaviour
     {
         ProcessTrust();
         ProcessRotation();
-
     }
 
     void ProcessTrust()
     {   
-
        if(Input.GetKey(KeyCode.Space))
         {
-            
-            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
-
-            if(!audios.isPlaying)
-            {
-               audios.PlayOneShot(mainEngine);
-            }
-
-            if(!center_booster_particle.isPlaying)
-            {
-                center_booster_particle.Play();
-            }
+            StartThrust();
         }
         else
         {
-                audios.Stop();
-                center_booster_particle.Stop();
+            StopThrust();
         }
-        
+    }
+
+    private void StopThrust()
+    {
+        audios.Stop();
+        center_booster_particle.Stop();
+    }
+
+    private void StartThrust()
+    {
+        rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+
+        if (!audios.isPlaying)
+        {
+            audios.PlayOneShot(mainEngine);
+        }
+
+        if (!center_booster_particle.isPlaying)
+        {
+            center_booster_particle.Play();
+        }
     }
 
     void ProcessRotation()
     {
         if(Input.GetKey(KeyCode.A))
         {
-            
-            ApplyRotation(rotationThrust);
-            if(!right_booster_particle.isPlaying)
-            {
-                right_booster_particle.Play();
-            }
+            RotateLeft();
 
         }
 
         else if(Input.GetKey(KeyCode.D))
         {
-            
-            ApplyRotation(-rotationThrust);
-            if(!left_booster_particle.isPlaying)
-            {
-                left_booster_particle.Play();
-            }
+            RotateRight();
         }
-        
+
         else
         {
-            right_booster_particle.Stop();
-            left_booster_particle.Stop();
+            StopParticalEffects();
         }
-
-
     }
 
+    private void StopParticalEffects()
+    {
+        right_booster_particle.Stop();
+        left_booster_particle.Stop();
+    }
+
+    private void RotateRight()
+    {
+        ApplyRotation(-rotationThrust);
+        if (!left_booster_particle.isPlaying)
+        {
+            left_booster_particle.Play();
+        }
+    }
+
+    private void RotateLeft()
+    {
+        ApplyRotation(rotationThrust);
+        if (!right_booster_particle.isPlaying)
+        {
+            right_booster_particle.Play();
+        }
+    }
 
     void ApplyRotation(float rotationFrame)
     {

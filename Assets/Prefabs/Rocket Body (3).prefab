@@ -542,7 +542,7 @@ MonoBehaviour:
   invoke_load_delay: 2
   success: {fileID: 8300000, guid: 7ab48bd5db7ddab46bb057e1c0831bbb, type: 3}
   crash: {fileID: 8300000, guid: cb4140c374ed6f4468809f4272b8f073, type: 3}
-  successParticles: {fileID: 0}
+  successParticles: {fileID: 4388417060716158901}
   crashParticles: {fileID: 1763223129817510089}
 --- !u!1 &5850772586656823189
 GameObject:
@@ -884,6 +884,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
+--- !u!198 &4388417060716158901 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198631066050499358, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
+  m_PrefabInstance: {fileID: 4478662661425073323}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4479382225400381539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4100699973242056, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
